@@ -1,0 +1,15 @@
+C:\Users\anonlo\Code\Projects\Backup-Tool\user-interface\user-interface\bin\Debug\net6.0-windows\user-interface.exe
+C:\Users\anonlo\Code\Projects\Backup-Tool\user-interface\user-interface\bin\Debug\net6.0-windows\user-interface.deps.json
+C:\Users\anonlo\Code\Projects\Backup-Tool\user-interface\user-interface\bin\Debug\net6.0-windows\user-interface.runtimeconfig.json
+C:\Users\anonlo\Code\Projects\Backup-Tool\user-interface\user-interface\bin\Debug\net6.0-windows\user-interface.dll
+C:\Users\anonlo\Code\Projects\Backup-Tool\user-interface\user-interface\bin\Debug\net6.0-windows\user-interface.pdb
+C:\Users\anonlo\Code\Projects\Backup-Tool\user-interface\user-interface\obj\Debug\net6.0-windows\user-interface.csproj.AssemblyReference.cache
+C:\Users\anonlo\Code\Projects\Backup-Tool\user-interface\user-interface\obj\Debug\net6.0-windows\user-interface.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\anonlo\Code\Projects\Backup-Tool\user-interface\user-interface\obj\Debug\net6.0-windows\user-interface.AssemblyInfoInputs.cache
+C:\Users\anonlo\Code\Projects\Backup-Tool\user-interface\user-interface\obj\Debug\net6.0-windows\user-interface.AssemblyInfo.cs
+C:\Users\anonlo\Code\Projects\Backup-Tool\user-interface\user-interface\obj\Debug\net6.0-windows\user-interface.csproj.CoreCompileInputs.cache
+C:\Users\anonlo\Code\Projects\Backup-Tool\user-interface\user-interface\obj\Debug\net6.0-windows\user-interface.dll
+C:\Users\anonlo\Code\Projects\Backup-Tool\user-interface\user-interface\obj\Debug\net6.0-windows\refint\user-interface.dll
+C:\Users\anonlo\Code\Projects\Backup-Tool\user-interface\user-interface\obj\Debug\net6.0-windows\user-interface.pdb
+C:\Users\anonlo\Code\Projects\Backup-Tool\user-interface\user-interface\obj\Debug\net6.0-windows\user-interface.genruntimeconfig.cache
+C:\Users\anonlo\Code\Projects\Backup-Tool\user-interface\user-interface\obj\Debug\net6.0-windows\ref\user-interface.dll
