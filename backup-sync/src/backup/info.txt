@@ -1,0 +1,1 @@
+This folder is where all file backups are stored either upon change detection or if it's new

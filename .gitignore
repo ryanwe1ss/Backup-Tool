@@ -1,0 +1,8 @@
+# IGNORE
+backup-sync/target
+backup-sync/src/main.pdb
+backup-sync/src/tracking.db
+backup-sync/src/backup/*
+
+# ALLOW
+!backup-sync/src/backup/info.txt
