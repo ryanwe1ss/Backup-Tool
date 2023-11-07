@@ -4,5 +4,8 @@ backup-sync/src/main.pdb
 backup-sync/src/tracking.db
 backup-sync/src/backup/*
 
+interface/user-interface/bin
+interface/user-interface/obj
+
 # ALLOW
 !backup-sync/src/backup/info.txt

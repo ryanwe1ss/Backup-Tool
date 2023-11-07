@@ -52,6 +52,16 @@ pub fn insert_file(file_name: &str, file_size: u64) -> SqliteResult<i32> {
   let database = Connection::open("tracking.db").unwrap();
 
   database.execute(
+    "DELETE FROM hashes WHERE file_id IN (SELECT id FROM files WHERE file_name = ?)",
+    params![file_name],
+  )?;
+
+  database.execute(
+    "DELETE FROM files WHERE file_name = ?",
+    params![file_name],
+  )?;
+
+  database.execute(
     "INSERT INTO files (file_name, size_in_bytes) VALUES (?, ?)",
     params![file_name, file_size as i64],
   )?;
@@ -120,4 +130,21 @@ pub fn get_file_hashes(file_name: &str) -> SqliteResult<Vec<String>> {
   }
 
   Ok(hashes)
+}
+
+pub fn delete_file(file_name: &str) -> SqliteResult<()> {
+  let database = Connection::open("tracking.db").unwrap();
+
+  database.execute(
+    "DELETE FROM hashes WHERE file_id IN (SELECT id FROM files WHERE file_name = ?)",
+    params![file_name],
+  )?;
+
+  database.execute(
+    "DELETE FROM files WHERE file_name = ?",
+    params![file_name],
+  )?;
+
+  database.close().unwrap();
+  Ok(())
 }

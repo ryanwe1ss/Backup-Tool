@@ -19,24 +19,30 @@ pub fn local_backup(files_to_backup: Vec<&str>, backup_path: &str) {
 
     if (fs::metadata(backup_path.to_owned() + file_name).is_ok()) {
       let file_backup = backup_path.to_owned() + file_name;
-      let hashes = file_has_changes(&file_name);
+      let (hashes, action) = file_has_changes(&file_name);
 
-      if (hashes.len() > 0) {
-        println!("{} has changes", file_backup);
+      match (action) {
+        1 => {
+          println!("{} has changes", file_backup);
+          file_exists_in_db = true;
 
-        let file_size = fs::metadata(file_name).unwrap().len();
-        file_exists_in_db = true;
-
-        fs::remove_file(backup_path.to_owned() + file_name).unwrap();
-        database::update_hashes_and_delete_file(file_name, file_size, hashes).unwrap();
-
-      } else {
-        println!("{} has no changes", file_backup);
-        continue;
+          fs::remove_file(file_backup).unwrap();
+          database::update_hashes_and_delete_file(file_name, fs::metadata(file_name).unwrap().len(), hashes).unwrap();
+        },
+        2 => {
+          println!("{} has been removed", file_backup);
+          continue;
+        },
+        _ => {
+          println!("{} has no changes", file_backup);
+          continue;
+        }
       }
     }
 
-    copy_file_in_chunks(file_name, backup_path, file_exists_in_db);
+    if (fs::metadata(file_name).is_ok()) {
+      copy_file_in_chunks(file_name, backup_path, file_exists_in_db).unwrap();
+    }
   }
 
   let end = std::time::Instant::now();
@@ -76,11 +82,20 @@ fn copy_file_in_chunks(file_name: &str, backup_path: &str, file_exists_in_db: bo
   Ok(())
 }
 
-fn file_has_changes(file_name: &str) -> Vec<String> {
+fn file_has_changes(file_name: &str) -> (Vec<String>, i32) {
   let mut buffer = vec![0; CHUNK_SIZE];
   let mut hasher = DefaultHasher::new();
-  let mut file = fs::File::open(file_name).expect("File not found");
 
+  if (fs::metadata(file_name).is_err()) {
+    database::delete_file(file_name).unwrap();
+    if (fs::metadata("backup/".to_owned() + file_name).is_ok()) {
+      fs::remove_file("backup/".to_owned() + file_name).unwrap();
+    }
+
+    return (Vec::new(), 2);
+  }
+
+  let mut file = fs::File::open(file_name).expect("File not found");
   let db_hashes = get_file_hashes(file_name).unwrap();
   let mut file_hashes: Vec<String> = Vec::new();
 
@@ -101,8 +116,8 @@ fn file_has_changes(file_name: &str) -> Vec<String> {
   println!("fl_hashes: {:?}", file_hashes);
 
   if (db_hashes != file_hashes) {
-    return file_hashes;
+    return (file_hashes, 1);
   }
 
-  Vec::new()
+  (Vec::new(), 0)
 }
